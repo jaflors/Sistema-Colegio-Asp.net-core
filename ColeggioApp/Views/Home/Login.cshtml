@@ -1,0 +1,87 @@
+﻿@model ColegioApp.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .panel {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+        box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    }
+
+    .panel-default {
+        border-color: #ddd;
+    }
+
+    .panel-body {
+        padding: 15px;
+    }
+</style>
+
+
+<div class="container">
+    <h1> Iniciar Sesión</h1>
+    <br />
+    <div class="row">
+        <div class="col-sm-4 ">
+            <div>
+                <div class="panel panel-default">
+                    <div class=" panel-body">
+
+                        <form accept-charset="UTF-8" role="form" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+
+                            <fieldset>
+                                <div class="form-group">
+
+                                    <input asp-for="Email" placeholder=" Correo" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+
+                                    <input asp-for="Password" class="form-control" placeholder="Contraseña" required="required" />
+                                    <span asp-validation-for="Password" class="text-danger"> </span>
+                                </div>
+
+
+                                <div class="custom-checkbox">
+                                    <label asp-for="Recuerdame">
+                                        <input asp-for="Recuerdame" />
+                                        @Html.DisplayNameFor(m => m.Recuerdame)
+                                    </label>
+
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-lg btn-success btn-block">Ingresar</button>
+                                </div>
+                                <div class="form-group">
+                                    <a asp-action="OlvidoPassword">¿Olvido la Password?</a>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+

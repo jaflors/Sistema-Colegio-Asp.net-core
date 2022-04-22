@@ -1,0 +1,246 @@
+﻿@model ColegioApp.Models.Calificacion
+@{
+    ViewData["Title"] = "GetStudent";
+    Layout = "~/Views/Administrador/AdminMaster.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+
+
+
+                <h2>Lista de Estudiantes:<small>Calificar</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <a class="btn btn-dark " asp-action="Index" style="margin-bottom:0px">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                        Volver
+                    </a>
+                    <a class="btn btn-success " data-toggle="modal" data-target="#myModal" style="margin-bottom:0px">Agregar Estudiante</a>
+
+                </ul>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+
+
+                @if (TempData["mensaje"] != null)
+                {
+
+
+                    <div name="alerta" class="alert alert-info alert-dismissible fade in" role="alert">
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>
+                            @TempData["mensaje"]
+                        </strong>
+                    </div>
+                }
+
+                @if (TempData["error"] != null)
+                {
+
+
+
+
+                    <div name="alerta" class="alert alert-danger alert-dismissible fade in" role="alert">
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>
+                            @TempData["error"]
+                        </strong>
+                    </div>
+
+
+
+                }
+
+
+
+
+                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+
+                            <th style="text-align:center">Nombre</th>
+                            <th style="text-align:center">Apellido</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        @if (TempData["NoStudent"] == null)
+                        {
+
+                            @foreach (System.Data.DataRow item in ViewBag.Estudiantes.Rows)
+                            {
+                                <tr>
+                                    <td style="text-align:center">@item["Nombre"].ToString()</td>
+                                    <td style="text-align:center">@item["Apellido"].ToString()</td>
+
+
+                                    <td style="text-align:center">
+                                        <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Calificar</a>
+
+                                        @*<a asp-action="Delete" asp-route-id="@item.IdGrado" class="btn btn-danger" data-toggle="modal" data-target="#myModal3"> Borrar</a>*@
+
+
+                                    </td>
+
+                                </tr>
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            <tr>
+
+                                <p>@TempData["NoStudent"]</p>
+
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+
+
+                <!-- Modal2 -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Calificar Estudiante</h4>
+                            </div>
+                            <form asp-action="Calificar" method="post">
+                                <div class="modal-body">
+
+                                    <!-- Modal- body-->
+
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <br />
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+
+                                                    <div class="row">
+
+                                                        <div class="form-horizontal form-label-left">
+
+                                                            <div class="form-group">
+
+                                                                <input type="hidden" asp-for="FkEstudiante" value="@ViewBag.IdEstudiante" />
+                                                                <input type="hidden" asp-for="FkMateria" value="@ViewBag.IdMateria" />
+
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                                    Nota 1<span class="required">*</span>
+                                                                </label>
+                                                                <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                                                    <select asp-for="Nota1" required="required" class="form-control">
+                                                                        <option>1</option>
+                                                                        <option>2</option>
+                                                                        <option>3</option>
+                                                                        <option>4</option>
+                                                                        <option>5</option>
+
+                                                                    </select>
+                                                                    <span asp-validation-for="Nota1" class="text-danger">  </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                                                    Nota 2<span class="required">*</span>
+                                                                </label>
+                                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                    <select asp-for="Nota2" required="required" class="form-control">
+                                                                        <option>1</option>
+                                                                        <option>2</option>
+                                                                        <option>3</option>
+                                                                        <option>4</option>
+                                                                        <option>5</option>
+
+                                                                    </select>
+                                                                    <span asp-validation-for="Nota2" class="text-danger">  </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                                                    Nota3<span class="required">*</span>
+                                                                </label>
+                                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                    <select asp-for="Nota3" required="required" class="form-control">
+                                                                        <option>1</option>
+                                                                        <option>2</option>
+                                                                        <option>3</option>
+                                                                        <option>4</option>
+                                                                        <option>5</option>
+
+                                                                    </select>
+                                                                    <span asp-validation-for="Nota3" class="text-danger">  </span>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">Guardar</button>
+                                </div>
+                            </form>
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

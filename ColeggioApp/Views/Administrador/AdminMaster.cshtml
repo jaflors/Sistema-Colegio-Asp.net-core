@@ -1,0 +1,378 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ColegioApp.Models.UsuarioAplicacion> SignInManager
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <title>Gentelella Alela! | </title>
+
+    <!-- Bootstrap -->
+    <link href="~/web_dev/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--validaciones-->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <!-- Font Awesome -->
+    <link href="~/web_dev/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/web_dev/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/web_dev/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="~/web_dev/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="~/web_dev/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/web_dev/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/web_dev/build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="../../web_dev/production/images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <div class="profile_info">
+                                <span>Welcome,</span>
+                                <h2>@User.Identity.Name</h2>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>no entra</p>
+                        }
+
+
+
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Administrador")))
+                    {
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <h3>General</h3>
+                                <ul class="nav side-menu">
+                                    <li>
+                                        <a><i class="fa fa-home"></i> Gestión Roles<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a asp-controller="Roles" asp-action="Index">Lista Roles</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a><i class="fa fa-university"></i>Grado <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a asp-controller="Grado" asp-action="Index">Lista Grados</a></li>
+
+                                        </ul>
+                                    </li>
+
+
+                                    <li>
+                                        <a><i class="fa fa-user"></i>Gestión Usuarios<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+
+                                            <li><a asp-controller="Profesor" asp-action="Index">Profesores</a></li>
+                                            <li><a asp-controller="EstudianteGrado" asp-action="Index">Estudiantes</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a><i class="fa fa-table"></i>Academico<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a asp-controller="Materias" asp-action="Index">Agregar Materias</a></li>
+                                            <li><a asp-controller="Periodo" asp-action="Index">Agregar Periodo</a></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    }
+                    else if (SignInManager.IsSignedIn(User) && (User.IsInRole("Profesor")))
+                    {
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <h3>General</h3>
+                                <ul class="nav side-menu">
+                                   
+                                    <li>
+                                        <a><i class="fa fa-university"></i>Mis Materias <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a asp-controller="Profesor" asp-action="GetGrados" asp-route-id="@SignInManager.UserManager.GetUserId(User)">Calificar</a></li>
+
+                                        </ul>
+                                    </li>
+
+
+                                   
+
+                                    
+
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+
+
+                    }
+                    else if (SignInManager.IsSignedIn(User) && (User.IsInRole("Estudiante")))
+                    {
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <h3>General</h3>
+                                <ul class="nav side-menu">
+
+                                    <li>
+                                        <a><i class="fa fa-university"></i>Mis Materias <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a asp-controller="Estudiante" asp-action="GetMaterias" asp-route-id="@SignInManager.UserManager.GetUserId(User)">Materias</a></li>
+
+                                        </ul>
+                                    </li>
+
+
+
+
+
+
+                                </ul>
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+
+
+
+                    }
+
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            @if (SignInManager.IsSignedIn(User))
+                                {
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="../../web_dev/production/images/img.jpg" alt="">@User.Identity.Name
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="javascript:;"> Profile</a></li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="badge bg-red pull-right">50%</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li><a href="javascript:;">Help</a></li>
+                                    <li>
+                                        <form method="post" asp-controller="Home" asp-action="CerrarSesion">
+                                            <button type="submit">
+                                                <i class="fa fa-sign-out pull-right"></i>
+                                                Cerrar Sesion
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                            }
+
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="text-center">
+                                            <a>
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                @RenderBody()
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/web_dev/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/web_dev/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/web_dev/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/web_dev/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="~/web_dev/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="~/web_dev/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/web_dev/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/web_dev/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="~/web_dev/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="~/web_dev/vendors/Flot/jquery.flot.js"></script>
+    <script src="~/web_dev/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="~/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="~/web_dev/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="~/web_dev/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="~/web_dev/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="~/web_dev/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="~/web_dev/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="~/web_dev/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="~/web_dev/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="~/web_dev/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="~/web_dev/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/web_dev/vendors/moment/min/moment.min.js"></script>
+    <script src="~/web_dev/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Datatables -->
+    <script src="~/web_dev/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    
+
+    <!-- Custom Theme Scripts -->
+    <script src="~/web_dev/build/js/custom.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

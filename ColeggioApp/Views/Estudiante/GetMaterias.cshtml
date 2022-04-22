@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewData["Title"] = "GetMaterias";
+    Layout = "~/Views/Administrador/AdminMaster.cshtml";
+    
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+
+
+
+                <h2>Grado :<small></small></h2>
+             
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+
+                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+
+                            <th style="text-align:center">Materia</th>
+                            <th style="text-align:center">Profesor</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        @if (TempData["NoMateria"] == null)
+                        {
+
+                            @foreach (System.Data.DataRow item in ViewBag.MisMaterias.Rows)
+                            {
+                                <tr>
+                                    <td style="text-align:center">@item["Nombre"].ToString()</td>
+                                    <td style="text-align:center">@item["Profesor"].ToString()</td>
+   
+                                    <td style="text-align:center">
+                                        <a asp-action="GetNotas" asp-route-id="@item["IdEstudiante"].ToString()" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"> Ver Notas</a>
+
+                                        @*<a asp-action="Delete" asp-route-id="@item.IdGrado" class="btn btn-danger" data-toggle="modal" data-target="#myModal3"> Borrar</a>*@
+
+
+                                    </td>
+
+                                </tr>
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            <tr>
+
+                                <p>@TempData["NoMateria"]</p>
+
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+
+
+                <!-- Modal2 -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,54 @@
+﻿@model ColegioApp.Models.Grado
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Editar Grado</h4>
+</div>
+<form asp-action="Edit" method="post">
+    <div class="modal-body">
+
+        <!-- Modal- body-->
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <br />
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <div class="row">
+
+
+                            <input type="hidden" asp-for="IdGrado" />
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Nombre <span class="required">*</span>
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <input type="text" asp-for="Nombre" required="required" class="form-control col-md-7 col-xs-12">
+                                    <span asp-validation-for="Nombre" class="text-danger">  </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </div>
+</form>
+

@@ -1,0 +1,119 @@
+﻿@model IEnumerable<ColegioApp.Models.Grado>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Administrador/AdminMaster.cshtml";
+}
+
+
+<style>
+    .darkblue-panel {
+        text-align: center;
+        background: #444c57;
+    }
+
+    .pn {
+        height: 250px;
+        box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+        .pn:hover {
+            box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);
+        }
+
+    .darkblue-panel .darkblue-header {
+        background: transparent;
+        padding: 3px;
+        margin-bottom: 15px;
+    }
+
+    .darkblue-panel h5 {
+        font-weight: 200;
+        margin-top: 10px;
+        color: white;
+    }
+
+    .darkblue-panel h1 {
+        color: #f2f2f2;
+    }
+
+    .mt {
+        margin-top: auto;
+    }
+
+    .centered {
+        text-align: center;
+    }
+
+    .darkblue-panel footer {
+        color: white;
+        margin-left: auto;
+        background: #444c57;
+    }
+</style>
+<div class="col-md-12 col-sm-12 col-xs-12 ">
+    <div class="row ">
+        <h3><i class="fa fa-angle-right"></i>Lista de Grados</h3>
+
+        <br />
+
+
+
+        <!-- SERVER STATUS PANELS -->
+
+        @if (Model.Count() > 0)
+        {
+
+
+
+
+            @foreach (var item in Model)
+            {
+
+
+                <div class="col-md-4 col-sm-4 mb col-xs-12" style="margin-bottom:25px">
+
+
+                    <div class="darkblue-panel pn">
+                        <div class="darkblue-header">
+                            <h5>@item.Nombre</h5>
+                        </div>
+                        <h1 class="mt"><i class="fa fa-book fa-3x"></i></h1>
+
+                        <footer>
+                            <div class="centered">
+
+                                <a asp-action="Create" class="btn btn-success" asp-route-id="@item.IdGrado">Agregar Materias</a>
+
+                            </div>
+                        </footer>
+                    </div>
+
+                </div>
+                <!-- /col-md-4-->
+
+
+
+
+
+            }
+
+        }
+        else
+        {
+            <p> No hay Registros</p>
+        }
+
+
+        <br />
+
+
+
+
+    </div>
+    <!-- /row -->
+
+
+
+</div>
+
+
