@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aFzIdizHODXE/n9fSx71acZ1peRTTrQJK2LmSmullBSK1ERpD4fJ7KsKsyG6iFJX+SpzZyrPtWC8N5vwGInXEw==",
+  "dgSpecHash": "7celYnM4BURG6QsPSClCF/X0EnMRGTVBDsL6cXX6dUGF+OkbmmHq4eJyTYD5fkzR9qNaoEvL1GXReOwhyG/CTA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jaime pc\\source\\repos\\ColeggioApp\\ColeggioApp\\ColegioApp.csproj",
+  "projectFilePath": "C:\\Users\\jaime pc\\Documents\\GitHub\\colegio\\ColeggioApp\\ColegioApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jaime pc\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jaime pc\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",

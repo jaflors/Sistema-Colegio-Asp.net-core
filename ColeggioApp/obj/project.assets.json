@@ -10460,11 +10460,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jaime pc\\source\\repos\\ColeggioApp\\ColeggioApp\\ColegioApp.csproj",
+      "projectUniqueName": "C:\\Users\\jaime pc\\Documents\\GitHub\\colegio\\ColeggioApp\\ColegioApp.csproj",
       "projectName": "ColegioApp",
-      "projectPath": "C:\\Users\\jaime pc\\source\\repos\\ColeggioApp\\ColeggioApp\\ColegioApp.csproj",
+      "projectPath": "C:\\Users\\jaime pc\\Documents\\GitHub\\colegio\\ColeggioApp\\ColegioApp.csproj",
       "packagesPath": "C:\\Users\\jaime pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jaime pc\\source\\repos\\ColeggioApp\\ColeggioApp\\obj\\",
+      "outputPath": "C:\\Users\\jaime pc\\Documents\\GitHub\\colegio\\ColeggioApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jaime pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
