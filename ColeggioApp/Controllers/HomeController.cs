@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ColeggioApp.Controllers
@@ -44,21 +45,18 @@ namespace ColeggioApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = await gestionUsuario.FindByEmailAsync(model.Email);
-                ViewData["userName"] = user.Nombre;
+                string fullname = user.Nombre + ' ' + user.Apellido;
+
 
                 var resultado = await gestionLogin.PasswordSignInAsync(user.UserName, model.Password,
                     model.Recuerdame, false);
 
 
-                if(gestionLogin.IsSignedIn(User))
-                {
-                    var name = User.Identity.Name;
-                }
-
-
 
                 if (resultado.Succeeded)
                 {
+                    await gestionUsuario.AddClaimAsync(user, new Claim("Fullname", fullname));
+
                     return RedirectToAction("Index", "Administrador");
 
 

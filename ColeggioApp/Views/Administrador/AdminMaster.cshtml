@@ -56,7 +56,7 @@
                         {
                             <div class="profile_info">
                                 <span>Welcome,</span>
-                                <h2>@User.Identity.Name</h2>
+                                <h2>@User.Claims.FirstOrDefault(x => x.Type == "Fullname").Value</h2>
                             </div>
                         }
                         else
